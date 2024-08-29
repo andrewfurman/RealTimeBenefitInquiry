@@ -48,8 +48,8 @@ function sendTranscriptForProcessing() {
     }
 }
 
-// Check for changes and process transcript every 5 seconds
-setInterval(sendTranscriptForProcessing, 5000);
+// Check for changes and process transcript every 7 seconds
+setInterval(sendTranscriptForProcessing, 7000);
 
 // Immediate call to start the process
 sendTranscriptForProcessing();

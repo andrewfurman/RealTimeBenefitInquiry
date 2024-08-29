@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const startButton = document.getElementById('startRecognition');
     const stopButton = document.getElementById('stopRecognition');
     const transcriptionDiv = document.getElementById('transcription');
+    const analysisDiv = document.getElementById('analysis');
 
     let recognition;
     let fullTranscript = '';
@@ -74,7 +75,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function sendTranscriptForProcessing() {
         console.log('Checking for transcript changes...');
-        const analysisTextarea = document.getElementById('analysis');
         const currentTranscript = transcriptionDiv.innerText;
 
         console.log('Current transcript:', currentTranscript);
@@ -95,7 +95,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             })
             .then(data => {
                 console.log('Analysis received:', data.analysis);
-                analysisTextarea.value = data.analysis;
+                // Use marked to render the markdown and insert it into the div
+                analysisDiv.innerHTML = marked.parse(data.analysis);
             })
             .catch(error => {
                 console.error('Error:', error);
