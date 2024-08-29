@@ -1,0 +1,22 @@
+{% extends 'header.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="column left">
+        <div class="content-header">
+            <h2>Transcript</h2>
+            <div class="button-group">
+                <button id="startRecognition">🎙️ Start Call Log</button>
+                <button id="stopRecognition" disabled>🛑 Stop Call Log</button>
+            </div>
+        </div>
+        <div id="transcription"></div>
+    </div>
+    <div class="column right">
+        <div class="content-header">
+            <h2>Insights from Plan Doc</h2>
+        </div>
+        <textarea id="analysis" placeholder="Answers to questions about Braven Medicare Advantage Plans will appear here..." readonly></textarea>
+    </div>
+</div>
+{% endblock %}
