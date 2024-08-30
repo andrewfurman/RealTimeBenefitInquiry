@@ -156,28 +156,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
         analysisDiv.innerHTML = ''; // Clear existing content
 
         // Reverse the order of the analysisHistory array
-        analysisHistory.slice().reverse().forEach((analysis, index) => {
+        analysisHistory.slice().reverse().forEach((analysis) => {
             const responseDiv = document.createElement('div');
             responseDiv.className = 'response';
-            const responseNumber = analysisHistory.length - index;
-            responseDiv.innerHTML = `<h3>Response ${responseNumber}</h3>${marked.parse(analysis)}`;
+            responseDiv.innerHTML = marked.parse(analysis);
             analysisDiv.appendChild(responseDiv);
         });
-
-        // No need to scroll as new responses are at the top
     }
 
-    // Check for changes and process transcript every 5 seconds
-    setInterval(sendTranscriptForProcessing, 5000);
+    // Check for changes and process transcript every 6 seconds
+    setInterval(sendTranscriptForProcessing, 6000);
 
     // Immediate call to start the process
     sendTranscriptForProcessing();
-
-    console.log('Script loaded and interval set');
-
-    // Manual trigger for testing
-    startButton.addEventListener('click', () => {
-        console.log('Manual trigger');
-        sendTranscriptForProcessing();
-    });
 });

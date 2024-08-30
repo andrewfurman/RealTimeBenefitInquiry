@@ -15,13 +15,10 @@ function updateAnalysisDiv() {
     analysisDiv.innerHTML = ''; // Clear existing content
 
     // Display responses in reverse order (newest first)
-    previousResponses.slice().reverse().forEach((analysis, index) => {
+    previousResponses.slice().reverse().forEach((analysis) => {
         const responseDiv = document.createElement('div');
         responseDiv.className = 'response';
-        const responseNumber = previousResponses.length - index;
-        responseDiv.innerHTML = `<h3>Response ${responseNumber}</h3>${marked.parse(analysis)}`;
+        responseDiv.innerHTML = marked.parse(analysis);
         analysisDiv.appendChild(responseDiv);
     });
 }
-
-// No longer call updateProcessingIndicator() since it has been removed
