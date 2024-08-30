@@ -3,93 +3,64 @@
 def get_plan_info():
     return """
 
-    ### Braven Medicare Choice (PPO) Region 1 Plan
+    ### Healthfirst Gold Leaf Health Plan Summary (Coverage Period: 1/1/24 – 12/31/24)
 
-    **Coverage Period:** Jan 1, 2024 – Dec 31, 2024  
-    **Service Area:** Bergen, Essex, Hudson, Middlesex, Monmouth, Ocean, Passaic, and Union counties
+    #### Overview:
+    - **Plan Type**: HMO
+    - **Coverage**: Individual and Family
 
-    ---
+    #### Premiums, Deductibles, and Out-of-Pocket Costs:
+    - **Annual Deductible**: $600 Individual / $1,200 Family (In-Network)
+      - *Exclusions*: Prescription drugs, preventive care visits.
+    - **Out-of-Pocket Limit**: $5,900 Individual / $11,800 Family
+      - *Exclusions*: Premiums, balance billing charges, non-covered services.
 
-    **Premium:** $0/month  
-    **Annual Medical Deductible:** $0  
-    **Max Out-of-Pocket:**  
-    - **In-Network:** $7,050  
-    - **Combined In/Out:** $11,500
+    #### Copayments and Coinsurance:
+    - **Primary Care Visit**: $25 after deductible
+    - **Specialist Visit**: $40 after deductible
+    - **Preventive Care**: No charge
+    - **Diagnostic Tests (X-ray, Blood Work)**: $25/$40 after deductible (Preauthorization required)
+    - **Imaging (CT/PET/MRI)**: $40 after deductible (Preauthorization required)
+    - **Emergency Room**: $150 after deductible (waived if admitted)
+    - **Urgent Care**: $60 after deductible
+    - **Hospital Stay**: $1,000 per admission after deductible (Preauthorization required)
+    - **Outpatient Surgery**: $100 after deductible (Preauthorization required)
+    - **Prescription Drugs**:
+      - **Generic**: $10 (30-day), $25 (90-day mail)
+      - **Preferred Brand**: $35 (30-day), $87.50 (90-day mail)
+      - **Non-Preferred Brand**: $70 (30-day), $175 (90-day mail)
+      - **Specialty**: $70 (30-day), $175 (90-day mail)
 
-    ---
+    #### Coverage Details:
+    - **Mental Health Services**:
+      - Outpatient: $25 after deductible (Preauthorization for select services)
+      - Inpatient: $1,000 per admission after deductible (Preauthorization required)
+    - **Pregnancy Care**:
+      - Professional Services: $100 after deductible
+      - Facility Services: $1,000 per admission after deductible
+    - **Rehabilitation/Habilitation**: $30 after deductible, up to 60 visits/year (combined, preauthorization required)
+    - **Skilled Nursing**: $1,000 per admission after deductible, up to 200 days/year (Preauthorization required)
+    - **Durable Medical Equipment**: 20% coinsurance after deductible (Preauthorization required)
+    - **Home Health Care**: $25 after deductible, up to 40 visits/year (Preauthorization required)
+    - **Hospice**: $1,000 per admission after deductible (Inpatient); $25 after deductible (Outpatient); Preauthorization required.
 
-    ### Covered Services & Costs
+    #### Excluded Services:
+    - **Not Covered**: Acupuncture, cosmetic surgery, dental (adult), long-term care, non-emergency care outside the U.S., private-duty nursing, routine eye care (adult), routine foot care, weight loss programs.
 
-    - **Inpatient Hospital:** $350/day for days 1-5, $0 after day 6. Prior auth may be needed.  
-    - **Outpatient Hospital/Observation:** $345 In-Network, $445 Out. Prior auth may be needed.  
-    - **Ambulatory Surgery:** $275 In-Network, $375 Out. Prior auth may be needed.  
-    - **Doctor Visits:** $0 for Primary, $30 for Specialist In-Network; $10 and $40 Out-Network. Prior auth may be needed.  
-    - **Preventive Care:** $0 In-Network, $10 Out. No prior auth needed.  
-    - **Emergency:** $100, covers worldwide up to $100,000/year.  
-    - **Urgent Care:** $40 In-Network, $100 Out (Worldwide).  
-    - **Diagnostics:**  
-      - **Radiology:** $40/$175 In-Network; $60/$200 Out.  
-      - **Lab:** $0 In-Network; $20/$50 Out.  
-      - **Therapeutic Radiology:** 20% both In- and Out-Network.  
-    - **Hearing:**  
-      - **Diagnostic Exam:** $30 In, $40 Out.  
-      - **Routine Exam:** $0 In, $40 Out.  
-      - **Hearing Aids:** $299-$1,199 In; Not covered Out.  
-    - **Dental:**  
-      - **Routine:** $0 In (3 cleanings, exams, fluoride/year); Higher cost Out.  
-      - **Comprehensive:** 50% In; Higher cost Out. $1,000 annual max.  
-      - **Medicare-Covered Dental:** 20% both In and Out.  
-    - **Vision:**  
-      - **Routine Exam:** $0 In, 50% Out.  
-      - **Lenses:** $0 In, 50% Out. $150 annual allowance for frames/contacts.  
-      - **Post-Cataract:** $0 both In and Out.  
-      - **Condition Exams:** $30 In, $40 Out.  
-    - **Chiropractic:** $15 In, $30 Out. Prior auth may be needed.  
-    - **SNF:** $0 for days 1-20, $203 for days 21-100 In-Network; 20% Out.  
-    - **Ambulance:** $250 for Ground/Air both In and Out.  
-    - **Home Health:** $0 In, $10 Out. Prior auth may be needed.  
-    - **Physical Therapy:** $20 In, $30 Out. Prior auth may be needed.  
-    - **Substance Use:** $40 In, $50 Out per session. Prior auth may be needed.  
-    - **Rehabilitation:** $20 In, $30 Out. Prior auth may be needed.  
-    - **Medicare Part B Drugs:** Up to 20% In and Out. Prior auth may be needed.
+    #### Other Covered Services:
+    - **Covered with Limitations**: Bariatric surgery, chiropractic care, infertility treatment, abortion services, hearing aids.
 
-    ---
+    #### Important Notes:
+    - **Network Providers**: Lower costs with network providers; higher costs or non-coverage with out-of-network providers.
+    - **No Referrals Needed**: You can see specialists without a referral.
 
-    ### Prescription Drugs
+    #### Appeals and Grievances:
+    - **Contact**: New York State Department of Financial Services, 800-342-3736.
+    - **Assistance**: Community Health Advocates, 888-614-5400.
 
-    - **Deductible:** $0 for Tiers 1, 2, 6; $200 for Tiers 3, 4, 5  
-    - **Initial Coverage:**  
-      - **Tier 1:** $0  
-      - **Tier 2:** $8  
-      - **Tier 3:** $47  
-      - **Tier 4:** $100  
-      - **Tier 5:** 30%  
-      - **Tier 6:** $0  
-    - **Coverage Gap:** 25% after $5,030 until $8,000  
-    - **Catastrophic:** $0 after $8,000  
-    - **Insulin:** $35 max per month  
-    - **Enhanced Coverage:** Tier 2 copay for non-Medicare drugs (e.g., ED drugs, cough meds)
+    #### Language Assistance:
+    - Available in Spanish, Tagalog, Chinese, Navajo, and other languages.
 
-    ---
-
-    ### Additional Benefits
-
-    - **OTC Allowance:** $70/quarter  
-    - **Flex Benefit:** $275/year (Weight Watchers, acupuncture, transport, etc.)  
-    - **Fitness:** $200/year  
-    - **Nurse Line:** $0  
-    - **In-Home Support:** 36 hours/year
-
-    ---
-
-    ### Prior Authorization
-
-    Required for services like inpatient/outpatient hospital stays, diagnostics, chiropractic, rehab, substance use services, and some Medicare Part B drugs.
-
-    ---
-
-    ### Contact Info
-
-    Visit [BravenHealth.com/2024EOCChoiceA](https://BravenHealth.com/2024EOCChoiceA) or call 1-833-272-8360 (TTY: 711).
+    This summary is designed to provide you with a compact yet detailed overview of the Healthfirst Gold Leaf Plan, covering key benefits, costs, and exclusions.
     
     """

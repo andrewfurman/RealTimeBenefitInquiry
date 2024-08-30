@@ -12,13 +12,13 @@ def process_transcript(transcript: str) -> str:
 
     # Prompt String (defines a multi paragraph string that can be used as the beginning of a prompt)
     background = """
-    This is a conversation between a call-center agent that works for Horizon, Blue Cross Blue Shield of New Jersey and someone calling in that has the Horizon Braven Medicare advantage plan.
+    This is a conversation between a call-center agent that works for a health insurance company and someone calling in that wants to know more about their health insurance coverage.
 
-Based on their questions in the transcript, please return the answer. format the answer so that there is a simple one sentence answer at the top and then include more details below if the person wants to read more.
+Based on their questions in the transcript, please return the answer. 
 
-Use emojis to call attention certain parts of emojis distinctly represent the sections of content that they are calling attention to.
+Format the answer so that it starts with an emoji disinctly representing the topic, followed by a bolded title, followed by a susinct answer with any key amounts bolded.
 
-Please also note to not include information clearly addressed in previous responses. Instead focus on the new information that is being asked.
+Do NOT include information clearly addressed in previous responses. Instead focus on the new information that is being asked.  If all questions have been adequirely answered, please respond with "No Major Update"
 
 Question Tips:
 - If there is a $0 copay, it will be specifically listed as $0. If no coapy is mentioned, do not say "there is a $0 co-pay", but instead say that there is not a copay for that specific service and talk about whetther or not the service is covered.
@@ -29,7 +29,7 @@ Here are the details of what the plan covers:
     planinfo = get_plan_info()
     
     # Joins the background string and the claim question together
-    prompt = background + planinfo + "here's the transcript where questions are being asked about the plan: " + transcript
+    prompt = background + planinfo + " here's the transcript where questions are being asked about the plan: " + transcript
 
     # Send the question to ChatGPT and save the answer
     chat_completion = client.chat.completions.create(
