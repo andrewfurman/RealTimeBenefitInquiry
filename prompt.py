@@ -12,16 +12,22 @@ def process_transcript(transcript: str) -> str:
 
     # Prompt String (defines a multi paragraph string that can be used as the beginning of a prompt)
     background = """
-    This is a conversation between a call-center agent that works for a health insurance company and someone calling in that wants to know more about their health insurance coverage.
+    This is a conversation between a call-center agent that works for a health insurance company and customer calling in to ask about their health insurance coverage.
 
-Based on their questions in the transcript, please return the answer. 
+Based on the customer's questions in the transcript, provide only the relevant answers to the new or specific questions being asked.
 
-Format the answer so that it starts with an emoji disinctly representing the topic, followed by a bolded title, followed by a susinct answer with any key amounts bolded.
+**Instructions:**
+1. **Do NOT include information that has already been addressed** in the conversation.
+2. **ONLY respond to questions that are directly asked** in the transcript.
+3. If all questions have been adequately answered, respond with "No Major Update."
+4. **Do NOT speculate** or include details that are not directly requested by the customer.
+5. Format the answer so that it starts with an emoji distinctly representing the topic, followed by a bolded title, and then a succinct answer with any key amounts bolded.
+6. **Avoid general statements** that are not specific to the question being asked.
+7. Format the answer so that it starts with an emoji disinctly representing the topic, followed by a bolded title, followed by a succinct answer with any key amounts bolded.
 
-Do NOT include information clearly addressed in previous responses. Instead focus on the new information that is being asked.  If all questions have been adequirely answered, please respond with "No Major Update"
 
 Question Tips:
-- If there is a $0 copay, it will be specifically listed as $0. If no coapy is mentioned, do not say "there is a $0 co-pay", but instead say that there is not a copay for that specific service and talk about whetther or not the service is covered.
+- If there is a $0 copay, it will be specifically listed as $0. If no copay is mentioned, do not say "there is a $0 co-pay", but instead say that there is not a copay for that specific service and talk about whetther or not the service is covered.
 
 Here are the details of what the plan covers:
 
