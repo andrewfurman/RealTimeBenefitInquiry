@@ -5,7 +5,7 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 /* Header styles */
@@ -16,14 +16,14 @@ header {
   padding: 1rem;
 }
 
-h1 {
-  margin: 0;
-}
+h1 { margin: 0; }
 
 /* Main content layout */
 .container {
   display: flex;
   flex: 1;
+  height: calc(100vh - 60px); /* Adjust 60px based on your header height */
+  overflow: hidden; /* Prevent scrolling on the main container */
 }
 
 .column {
@@ -31,37 +31,43 @@ h1 {
   flex-direction: column;
   padding: 1rem;
   box-sizing: border-box;
-  flex: 1;
 }
 
 .left {
+  flex: 1;
+  width: 33.33%;
   background-color: #f1f1f1;
+  overflow-y: auto; /* Allow scrolling if content overflows */
 }
 
 .right {
+  flex: 2;
+  width: 66.67%;
   background-color: #e1e1e1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
 /* Content header styles */
 .content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 1rem;
 }
 
-.content-header h2 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-}
+.content-header h2 { margin: 0; }
 
 /* Button styles */
 .button-group {
   display: flex;
   gap: 10px;
-  margin-bottom: 0.5rem;
 }
 
 button {
-  padding: 10px 15px;
-  font-size: 14px;
+  padding: 4px 8px;
+  font-size: 13px;
   cursor: pointer;
   background-color: #4CAF50;
   color: white;
@@ -70,10 +76,7 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: #45a049;
-}
-
+button:hover { background-color: #45a049; }
 button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
@@ -82,15 +85,12 @@ button:disabled {
 /* Transcription and analysis areas */
 #transcription, #analysis {
   flex: 1;
-  overflow-y: auto;
   border: 1px solid #ccc;
   padding: 10px;
   background-color: white;
   box-sizing: border-box;
-  min-height: 300px;
 }
 
-/* Analysis textarea */
 #analysis {
   resize: none;
   font-family: Arial, sans-serif;
@@ -98,15 +98,25 @@ button:disabled {
 
 /* Responsive design */
 @media (max-width: 768px) {
-  .container {
+  .container { flex-direction: column; }
+  .column { width: 100%; }
+  .content-header {
     flex-direction: column;
+    align-items: flex-start;
   }
+  .button-group { margin-top: 0.5rem; }
+}
 
-  .column {
-    width: 100%;
-  }
+/* Response styles */
+.response {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
 
-  #transcription, #analysis {
-    min-height: 200px;
-  }
+.response h3 {
+    margin-top: 0;
+    color: #333;
 }

@@ -1,3 +1,12 @@
+/**
+ * script.js
+ * 
+ * This script manages the speech recognition process, handles the real-time transcription,
+ * sends the transcript to the server for processing, and updates the analysis view with
+ * the results. It uses the Web Speech API for speech recognition and fetch API for server
+ * communication.
+ */
+
 document.addEventListener('DOMContentLoaded', (event) => {
     const startButton = document.getElementById('startRecognition');
     const stopButton = document.getElementById('stopRecognition');
@@ -7,12 +16,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let recognition;
     let fullTranscript = '';
     let isListening = false;
+    let analysisHistory = [];
 
     if ('webkitSpeechRecognition' in window) {
         recognition = new webkitSpeechRecognition();
         recognition.continuous = true;
         recognition.interimResults = true;
 
+        /**
+         * Capture the transcription results and update the transcriptionDiv.
+         */
         recognition.onresult = function(event) {
             let interimTranscript = '';
             let currentTranscript = '';
@@ -33,6 +46,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             transcriptionDiv.scrollTop = transcriptionDiv.scrollHeight;
         };
 
+        /**
+         * Handle the end of the recognition process, restarting if necessary.
+         */
         recognition.onend = function() {
             console.log('Speech recognition service disconnected');
             if (isListening) {
@@ -41,6 +57,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
         };
 
+        /**
+         * Handle recognition errors, restarting if necessary.
+         */
         recognition.onerror = function(event) {
             console.error('Speech recognition error:', event.error);
             if (event.error === 'no-speech' && isListening) {
@@ -50,6 +69,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
         };
 
+        /**
+         * Start the speech recognition process when the start button is pressed.
+         */
         startButton.onclick = function() {
             fullTranscript = '';
             transcriptionDiv.innerHTML = '';
@@ -59,6 +81,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             stopButton.disabled = false;
         };
 
+        /**
+         * Stop the speech recognition process when the stop button is pressed.
+         */
         stopButton.onclick = function() {
             recognition.stop();
             isListening = false;
@@ -73,6 +98,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     let lastProcessedTranscript = '';
 
+    /**
+     * Send the current transcript and previous responses to the server for processing.
+     */
     function sendTranscriptForProcessing() {
         console.log('Checking for transcript changes...');
         const currentTranscript = transcriptionDiv.innerText;
@@ -82,12 +110,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         if (currentTranscript !== lastProcessedTranscript) {
             console.log('Transcript changed, processing...');
+
+            // Create a formatted string for previous responses
+            const formattedPreviousResponses = analysisHistory.length > 0
+                ? "Here are the previous responses that I've already highlighted to the member and call center agent. No need to send information about these items:\n\n" + analysisHistory.join('\n\n')
+                : "";
+
+            console.log('Formatted previous responses:', formattedPreviousResponses);
+
             fetch('/process_transcript', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ transcript: currentTranscript }),
+                body: JSON.stringify({
+                    transcript: currentTranscript,
+                    previousResponses: formattedPreviousResponses
+                }),
             })
             .then(response => {
                 console.log('Response received:', response);
@@ -95,8 +134,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
             })
             .then(data => {
                 console.log('Analysis received:', data.analysis);
-                // Use marked to render the markdown and insert it into the div
-                analysisDiv.innerHTML = marked.parse(data.analysis);
+                // Add the new analysis to the history
+                analysisHistory.push(data.analysis);
+                // Update the analysis div with all responses
+                updateAnalysisDiv();
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -106,6 +147,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
         } else {
             console.log('No change in transcript');
         }
+    }
+
+    /**
+     * Update the analysis div with the current analysis history.
+     */
+    function updateAnalysisDiv() {
+        analysisDiv.innerHTML = ''; // Clear existing content
+
+        // Reverse the order of the analysisHistory array
+        analysisHistory.slice().reverse().forEach((analysis, index) => {
+            const responseDiv = document.createElement('div');
+            responseDiv.className = 'response';
+            const responseNumber = analysisHistory.length - index;
+            responseDiv.innerHTML = `<h3>Response ${responseNumber}</h3>${marked.parse(analysis)}`;
+            analysisDiv.appendChild(responseDiv);
+        });
+
+        // No need to scroll as new responses are at the top
     }
 
     // Check for changes and process transcript every 5 seconds

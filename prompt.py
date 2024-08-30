@@ -14,9 +14,11 @@ def process_transcript(transcript: str) -> str:
     background = """
     This is a conversation between a call-center agent that works for Horizon, Blue Cross Blue Shield of New Jersey and someone calling in that has the Horizon Braven Medicare advantage plan.
 
-Based on their questions, please return the answer. format the answer so that there is a simple one sentence answer at the top and then include more details below if the person wants to read more.
+Based on their questions in the transcript, please return the answer. format the answer so that there is a simple one sentence answer at the top and then include more details below if the person wants to read more.
 
 Use emojis to call attention certain parts of emojis distinctly represent the sections of content that they are calling attention to.
+
+Please also note to not include information clearly addressed in previous responses. Instead focus on the new information that is being asked.
 
 Question Tips:
 - If there is a $0 copay, it will be specifically listed as $0. If no coapy is mentioned, do not say "there is a $0 co-pay", but instead say that there is not a copay for that specific service and talk about whetther or not the service is covered.

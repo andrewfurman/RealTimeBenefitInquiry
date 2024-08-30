@@ -1,66 +1,27 @@
-let lastProcessedTranscript = '';
-let isProcessing = false;
+/**
+ * process_transcript.js
+ * 
+ * This script handles updating the analysis view based on the processed transcripts 
+ * received from the server. It also manages the UI while the transcript is being 
+ * processed, providing feedback to the user.
+ */
 
-function updateProcessingIndicator() {
-    const processingIndicator = document.getElementById('processingIndicator');
-    processingIndicator.textContent = isProcessing ? 'Processing...' : 'Analysis will appear here during the conversation';
+/**
+ * Update the analysis div to display the previous responses in reverse order (newest first).
+ * This function clears the existing content and then appends new responses to the analysis div.
+ */
+function updateAnalysisDiv() {
+    const analysisDiv = document.getElementById('analysis');
+    analysisDiv.innerHTML = ''; // Clear existing content
+
+    // Display responses in reverse order (newest first)
+    previousResponses.slice().reverse().forEach((analysis, index) => {
+        const responseDiv = document.createElement('div');
+        responseDiv.className = 'response';
+        const responseNumber = previousResponses.length - index;
+        responseDiv.innerHTML = `<h3>Response ${responseNumber}</h3>${marked.parse(analysis)}`;
+        analysisDiv.appendChild(responseDiv);
+    });
 }
 
-function sendTranscriptForProcessing() {
-    console.log('Checking for transcript changes...');
-    const transcriptionDiv = document.getElementById('transcription');
-    const analysisTextarea = document.getElementById('analysis');
-    const currentTranscript = transcriptionDiv.innerText;
-
-    console.log('Current transcript:', currentTranscript);
-    console.log('Last processed transcript:', lastProcessedTranscript);
-
-    if (currentTranscript !== lastProcessedTranscript) {
-        console.log('Transcript changed, processing...');
-        isProcessing = true;
-        updateProcessingIndicator();
-        fetch('/process_transcript', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ transcript: currentTranscript }),
-        })
-        .then(response => {
-            console.log('Response received:', response);
-            return response.json();
-        })
-        .then(data => {
-            console.log('Analysis received:', data.analysis);
-            analysisTextarea.value = data.analysis;
-            isProcessing = false;
-            updateProcessingIndicator();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            isProcessing = false;
-            updateProcessingIndicator();
-        });
-
-        lastProcessedTranscript = currentTranscript;
-    } else {
-        console.log('No change in transcript');
-    }
-}
-
-// Check for changes and process transcript every 7 seconds
-setInterval(sendTranscriptForProcessing, 7000);
-
-// Immediate call to start the process
-sendTranscriptForProcessing();
-
-console.log('Script loaded and interval set');
-
-// Add this at the end of the file
-document.getElementById('startRecognition').addEventListener('click', () => {
-    console.log('Manual trigger');
-    sendTranscriptForProcessing();
-});
-
-// Ensure the processing indicator is visible immediately
-updateProcessingIndicator();
+// No longer call updateProcessingIndicator() since it has been removed
